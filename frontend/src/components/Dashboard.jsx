@@ -131,7 +131,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchRobots = async () => {
       try {
-        const response = await fetch('http://localhost:5000/robots');
+        const response = await fetch('https://robotfleetmonitoring.onrender.com/robots');
         const data = await response.json();
         setRobots(data);
       } catch (error) {
@@ -141,7 +141,7 @@ const Dashboard = () => {
 
     fetchRobots();
 
-    const socket = io('http://localhost:5000');
+    const socket = io('https://robotfleetmonitoring.onrender.com');
     socket.on('update', (updatedRobots) => {
       setRobots(updatedRobots);
     });
