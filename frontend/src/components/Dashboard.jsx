@@ -10,8 +10,6 @@ import {
 import L from 'leaflet';
 import { 
   BatteryLow, 
-  BatteryFull, 
-  BatteryMedium, 
   Server, 
   Power, 
   Cpu, 
