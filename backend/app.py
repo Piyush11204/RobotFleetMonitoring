@@ -1,14 +1,16 @@
+from gevent import monkey
+monkey.patch_all()
+
 from flask import Flask, jsonify
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
 import random
 import uuid
-import time
 from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, async_mode='gevent', cors_allowed_origins="*")
 
 # Sample mock robot data
 def generate_initial_robots(num_robots=10):
@@ -58,7 +60,7 @@ def generate_data():
             ]
         
         socketio.emit('update', robots)
-        socketio.sleep(10)  
+        socketio.sleep(10)  # Update every 10 seconds
 
 # WebSocket Event for real-time data
 @socketio.on('connect')
